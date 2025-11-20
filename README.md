@@ -1,6 +1,6 @@
 # 🦷 Dental Caries (Cavity) Detector - YOLOv8 Project
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://dental-carries-detector.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://dentalcarriesdetector.streamlit.app)
 
 This is an end-to-end Computer Vision project designed to detect dental caries (cavities) in X-ray images. The system utilizes a custom **YOLOv8-OBB** (Oriented Bounding Box) model trained via **Transfer Learning** and features an interactive deployment on **Streamlit Cloud**.
 
