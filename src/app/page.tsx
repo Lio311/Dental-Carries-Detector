@@ -5,7 +5,7 @@ import { Upload, Activity, ShieldAlert, Download, BarChart2 } from 'lucide-react
 import * as ort from 'onnxruntime-web';
 
 // Configure ONNX Runtime to load WASM from CDN to avoid Next.js static serving issues
-ort.env.wasm.wasmPaths = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.17.1/dist/";
+ort.env.wasm.wasmPaths = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.27.0/dist/";
 ort.env.wasm.numThreads = 1;
 
 type BoundingBox = {

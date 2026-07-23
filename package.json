@@ -11,7 +11,8 @@
   "dependencies": {
     "lucide-react": "latest",
     "next": "16.2.11",
-    "onnxruntime-web": "1.17.1",
+    "onnxruntime-node": "^1.27.0",
+    "onnxruntime-web": "1.27.0",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
