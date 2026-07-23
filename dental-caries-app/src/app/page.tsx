@@ -179,8 +179,8 @@ export default function DentalCariesDetector() {
         ctx.lineWidth = Math.max(2, img.width / 400);
         ctx.strokeRect(d.x1, d.y1, d.x2 - d.x1, d.y2 - d.y1);
 
-        const text = \`Caries \${Math.round(d.conf * 100)}%\`;
-        ctx.font = \`\${Math.max(12, img.width / 50)}px Arial\`;
+        const text = `Caries ${Math.round(d.conf * 100)}%`;
+        ctx.font = `${Math.max(12, img.width / 50)}px Arial`;
         
         const metrics = ctx.measureText(text);
         ctx.fillStyle = color;
