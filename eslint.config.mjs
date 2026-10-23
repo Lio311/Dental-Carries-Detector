@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local, untracked model smoke-test script (CommonJS, run with plain node).
+    "test-model.js",
   ]),
 ]);
 

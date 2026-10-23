@@ -24,6 +24,8 @@ export default function DentalCariesDetector() {
   const [detections, setDetections] = useState<BoundingBox[]>([]);
   const [threshold, setThreshold] = useState(0.25);
   const [error, setError] = useState<string | null>(null);
+  // True once the result canvas holds a processed image; until then the raw upload is previewed.
+  const [hasResult, setHasResult] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const originalCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -34,7 +36,7 @@ export default function DentalCariesDetector() {
         const session = await ort.InferenceSession.create('/best.onnx', { executionProviders: ['wasm'] });
         setModel(session);
         setIsLoading(false);
-      } catch (err: any) {
+      } catch (err) {
         console.error("Failed to load model:", err);
         setError("Failed to load AI model. Please ensure best.onnx is available in the public folder.");
         setIsLoading(false);
@@ -49,6 +51,7 @@ export default function DentalCariesDetector() {
       const url = URL.createObjectURL(file);
       setImageSrc(url);
       setDetections([]);
+      setHasResult(false);
     }
   };
 
@@ -107,7 +110,7 @@ export default function DentalCariesDetector() {
 
       // YOLOv8 output: [1, 5, 8400]
       const numElements = 8400;
-      let rawDetections: BoundingBox[] = [];
+      const rawDetections: BoundingBox[] = [];
 
       for (let i = 0; i < numElements; i++) {
         const conf = output[4 * numElements + i];
@@ -190,6 +193,7 @@ export default function DentalCariesDetector() {
         ctx.fillStyle = '#000';
         ctx.fillText(text, d.x1 + 5, d.y1 - 5);
       });
+      setHasResult(true);
 
     } catch (err) {
       console.error(err);
@@ -284,7 +288,7 @@ export default function DentalCariesDetector() {
                   ref={canvasRef} 
                   className="max-w-full max-h-[600px] object-contain rounded-lg shadow-sm border border-slate-200"
                 />
-                {!isProcessing && detections.length === 0 && imageSrc && !canvasRef.current?.width && (
+                {!isProcessing && !hasResult && (
                    <img src={imageSrc} className="max-w-full max-h-[600px] object-contain rounded-lg" alt="preview" />
                 )}
               </div>
